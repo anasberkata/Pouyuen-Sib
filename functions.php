@@ -15,6 +15,38 @@ function query($query)
     return $rows;
 }
 
+
+// CRUD USER
+function users_profile_edit($data)
+{
+    global $conn;
+
+    $id = $data["id"];
+
+    $nama = $data["nama"];
+    $username = $data["username"];
+    $alamat = $data["alamat"];
+    $phone = $data["phone"];
+    $email = $data["email"];
+    $role_id = $data["role_id"];
+
+    $query = "UPDATE users SET
+			nama = '$nama',
+			username = '$username',
+			email = '$email',
+			phone = '$phone',
+			alamat = '$alamat',
+			role_id = '$role_id'
+
+            WHERE id = $id
+			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+
 // // FORM PENDAFTARAN =====================================================
 // function register($data)
 // {

@@ -2,17 +2,13 @@
 include "../view_template/header.php";
 include "../view_template/topbar.php";
 include "../view_template/sidebar.php";
+
+$users = query("SELECT * FROM users WHERE role_id = 2");
 ?>
 
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Daftar User</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Daftar User</li>
-      </ol>
-    </nav>
+    <h1>Daftar Pengguna Aplikasi</h1>
   </div><!-- End Page Title -->
 
   <section class="section dashboard">
@@ -25,27 +21,32 @@ include "../view_template/sidebar.php";
           <div class="col-12">
             <div class="card recent-sales overflow-auto">
               <div class="card-body">
-                <h5 class="card-title">Daftar Barang</h5>
-
+                <a href="users-add.php" class="btn btn-primary mt-3 mb-3">Tambah Pengguna</a>
                 <table class="table table-borderless datatable">
                   <thead>
                     <tr>
                       <th scope="col">No. </th>
                       <th scope="col">Nama</th>
-                      <th scope="col">Roleg</th>
+                      <th scope="col">Telephone</th>
+                      <th scope="col">E-Mail</th>
                       <th scope="col">Opsi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</a></th>
-                      <td>Riana Cahyawati</a></td>
-                      <td>Admin</td>
-                      <td>
-                        <button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button> |
-                        <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                      </td>
-                    </tr>
+                    <?php $i = 1; ?>
+                    <?php foreach ($users as $u) : ?>
+                      <tr>
+                        <th scope="row"><?= $i; ?></a></th>
+                        <td><?= $u['nama']; ?></a></td>
+                        <td><?= $u['phone']; ?></a></td>
+                        <td><?= $u['email']; ?></a></td>
+                        <td>
+                          <button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button> |
+                          <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                      </tr>
+                      <?php $i++; ?>
+                    <?php endforeach; ?>
                   </tbody>
                 </table>
 

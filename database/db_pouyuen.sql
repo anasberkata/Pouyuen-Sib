@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2022 at 04:33 PM
+-- Generation Time: Apr 27, 2022 at 03:13 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -34,15 +34,36 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
-  `level` int(11) NOT NULL
+  `alamat` varchar(255) NOT NULL,
+  `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `username`, `password`, `email`, `phone`, `level`) VALUES
-(1, 'Riana Cahyawati', 'admin', 'admin', 'rianacahyawati@gmail.com', '08777777777', 2);
+INSERT INTO `users` (`id`, `nama`, `username`, `password`, `email`, `phone`, `alamat`, `role_id`) VALUES
+(1, 'Riana Cahyawati', 'admin', 'admin', 'rianacahyawati@gmail.com', '085314923764', 'Cianjur', 2),
+(2, 'Eka Anas Jatnika', 'anasberkata', '12345', 'anasberkata@gmail.com', '085156334607', 'Protanmas Samolo Indah Blok C5 No. 15', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_role`
+--
+
+CREATE TABLE `users_role` (
+  `id_role` int(11) NOT NULL,
+  `role_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users_role`
+--
+
+INSERT INTO `users_role` (`id_role`, `role_name`) VALUES
+(1, 'Super'),
+(2, 'Admin');
 
 --
 -- Indexes for dumped tables
@@ -55,6 +76,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users_role`
+--
+ALTER TABLE `users_role`
+  ADD PRIMARY KEY (`id_role`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -62,7 +89,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users_role`
+--
+ALTER TABLE `users_role`
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

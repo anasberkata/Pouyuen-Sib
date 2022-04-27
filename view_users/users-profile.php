@@ -2,19 +2,30 @@
 include "../view_template/header.php";
 include "../view_template/topbar.php";
 include "../view_template/sidebar.php";
+
+$id = $_SESSION['id'];
+$users = query("SELECT * FROM users INNER JOIN users_role ON users.role_id = users_role.id_role WHERE id = $id")[0];
+
+if (isset($_POST["users_profile_edit"])) {
+  // cek apakah data berhasil di tambahkan atau tidak
+  if (users_profile_edit($_POST) > 0) {
+    echo "<script>
+            alert('Data Berhasil Ditambah!');
+            document.location.href = 'users-profile.php';
+          </script>";
+  } else {
+    echo "<script>
+            alert('Data Gagal Ditambah!');
+            document.location.href = 'users-profile.php';
+          </script>";
+  }
+}
 ?>
 
 <main id="main" class="main">
 
   <div class="pagetitle">
     <h1>Profile</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item">Users</li>
-        <li class="breadcrumb-item active">Profile</li>
-      </ol>
-    </nav>
   </div><!-- End Page Title -->
 
   <section class="section profile">
@@ -46,27 +57,32 @@ include "../view_template/sidebar.php";
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label ">Nama</div>
-                  <div class="col-lg-9 col-md-8">Riana Cahyawati</div>
+                  <div class="col-lg-9 col-md-8"><?= $users['nama']; ?></div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Perusahaan</div>
-                  <div class="col-lg-9 col-md-8">PT. Pou Yuen Indonesia</div>
+                  <div class="col-lg-3 col-md-4 label ">Username</div>
+                  <div class="col-lg-9 col-md-8"><?= $users['username']; ?></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Alamat</div>
-                  <div class="col-lg-9 col-md-8">Cianjur</div>
+                  <div class="col-lg-9 col-md-8"><?= $users['alamat']; ?></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Telephone / Whatsapp</div>
-                  <div class="col-lg-9 col-md-8">08519999999</div>
+                  <div class="col-lg-9 col-md-8"><?= $users['phone']; ?></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Email</div>
-                  <div class="col-lg-9 col-md-8">rianacahyawati@gmail.com</div>
+                  <div class="col-lg-9 col-md-8"><?= $users['email']; ?></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Role</div>
+                  <div class="col-lg-9 col-md-8"><?= $users['role_name']; ?></div>
                 </div>
 
               </div>
@@ -74,44 +90,58 @@ include "../view_template/sidebar.php";
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                 <!-- Profile Edit Form -->
-                <form>
+                <form action="" method="post">
+
+                  <input name="id" type="hidden" value="<?= $users['id']; ?>">
+
                   <div class="row mb-3">
-                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                    <label for="nama" class="col-md-4 col-lg-3 col-form-label">Nama</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                      <input name="nama" type="text" class="form-control" id="nama" value="<?= $users['nama']; ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                    <label for="username" class="col-md-4 col-lg-3 col-form-label">Username</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                      <input name="username" type="text" class="form-control" id="username" value="<?= $users['username']; ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                    <label for="alamat" class="col-md-4 col-lg-3 col-form-label">Alamat</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                      <input name="alamat" type="text" class="form-control" id="alamat" value="<?= $users['alamat']; ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                    <label for="phone" class="col-md-4 col-lg-3 col-form-label">Telephone / Whatsapp</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
+                      <input name="phone" type="text" class="form-control" id="phone" value="<?= $users['phone']; ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
+                      <input name="email" type="email" class="form-control" id="Email" value="<?= $users['email']; ?>">
                     </div>
                   </div>
 
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  <div class="row mb-3">
+                    <label for="role" class="col-md-4 col-lg-3 col-form-label">Role</label>
+                    <div class="col-md-8 col-lg-9">
+                      <select class="form-select" aria-label="Default select example" id="role" name="role_id">
+                        <option value="<?= $users['role_id']; ?>"><?= $users['role_name']; ?></option>
+                        <option value="2">Admin</option>
+                        <option value="3">User</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="submit" class="btn btn-primary" name="users_profile_edit">Simpan</button>
                   </div>
                 </form><!-- End Profile Edit Form -->
 

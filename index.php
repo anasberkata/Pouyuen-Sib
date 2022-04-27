@@ -1,4 +1,13 @@
-<?php include "v_header.php"; ?>
+<?php
+session_start();
+
+if(isset($_SESSION['login'])){
+  header("Location: view_admin/index.php");
+  exit;
+}
+
+include "v_header.php";
+?>
 
 <main>
     <div class="container">
@@ -24,13 +33,6 @@
                                 </div>
 
                                 <form class="row g-3 needs-validation mb-3" action="check_login.php" method="post">
-                                    <?php
-                                    if (isset($_GET['pesan'])) {
-                                        if ($_GET['pesan'] == "gagal") {
-                                            echo "<div class='alert alert-danger' role='alert'>Username / Password Tidak Sesuai!</div>";
-                                        }
-                                    }
-                                    ?>
                                     <div class="col-12">
                                         <label for="yourUsername" class="form-label">Username</label>
                                         <div class="input-group has-validation">
