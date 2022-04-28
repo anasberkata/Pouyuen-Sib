@@ -16,13 +16,44 @@ function query($query)
 }
 
 
-// CRUD USER
-function users_profile_edit($data)
+// CRUD USER & PROFILE
+function users_add($data)
+{
+    global $conn;
+
+    $nama = $data["nama"];
+    $username = $data["username"];
+    $password = $data["password"];
+    $alamat = $data["alamat"];
+    $phone = $data["phone"];
+    $email = $data["email"];
+    $role_id = $data["role_id"];
+
+    $result = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+
+    // Cek Username Mahasiswa Sudah Ada Atau Belum
+    if (mysqli_fetch_assoc($result)) {
+        echo "<script>
+            alert('Username Sudah Terdaftar!');
+            document.location.href = 'users-add.php';
+            </script>";
+    }
+
+    $query = "INSERT INTO users
+				VALUES
+			(NULL, '$nama', '$username', '$password', '$email', '$phone', '$alamat', '$role_id')
+			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function users_edit($data)
 {
     global $conn;
 
     $id = $data["id"];
-
     $nama = $data["nama"];
     $username = $data["username"];
     $alamat = $data["alamat"];
@@ -40,6 +71,56 @@ function users_profile_edit($data)
 
             WHERE id = $id
 			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function users_delete($id)
+{
+    global $conn;
+    mysqli_query($conn, "DELETE FROM users WHERE id = $id");
+    return mysqli_affected_rows($conn);
+}
+
+function users_profile_edit($data)
+{
+    global $conn;
+
+    $id = $data["id"];
+    $nama = $data["nama"];
+    $username = $data["username"];
+    $alamat = $data["alamat"];
+    $phone = $data["phone"];
+    $email = $data["email"];
+    $role_id = $data["role_id"];
+
+    $query = "UPDATE users SET
+			nama = '$nama',
+			username = '$username',
+			email = '$email',
+			phone = '$phone',
+			alamat = '$alamat',
+			role_id = '$role_id'
+
+            WHERE id = $id
+			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function users_profile_password_edit($data)
+{
+    global $conn;
+
+    $id = $data["id"];
+
+    $newPassword = $data["newPassword"];
+
+    $query = "UPDATE `users` SET `password`='$newPassword' WHERE `id`='$id'";
 
     mysqli_query($conn, $query);
 

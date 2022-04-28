@@ -7,7 +7,6 @@ $id = $_SESSION['id'];
 $users = query("SELECT * FROM users INNER JOIN users_role ON users.role_id = users_role.id_role WHERE id = $id")[0];
 
 if (isset($_POST["users_profile_edit"])) {
-  // cek apakah data berhasil di tambahkan atau tidak
   if (users_profile_edit($_POST) > 0) {
     echo "<script>
             alert('Data Berhasil Ditambah!');
@@ -16,6 +15,20 @@ if (isset($_POST["users_profile_edit"])) {
   } else {
     echo "<script>
             alert('Data Gagal Ditambah!');
+            document.location.href = 'users-profile.php';
+          </script>";
+  }
+}
+
+if (isset($_POST["users_profile_password_edit"])) {
+  if (users_profile_password_edit($_POST) > 0) {
+    echo "<script>
+            alert('Password Berhasil Diubah!');
+            document.location.href = 'users-profile.php';
+          </script>";
+  } else {
+    echo "<script>
+            alert('Password Gagal Diubah!');
             document.location.href = 'users-profile.php';
           </script>";
   }
@@ -140,8 +153,11 @@ if (isset($_POST["users_profile_edit"])) {
                     </div>
                   </div>
 
-                  <div class="text-end">
-                    <button type="submit" class="btn btn-primary" name="users_profile_edit">Simpan</button>
+                  <div class="row mb-3">
+                    <label for="" class="col-md-4 col-lg-3 col-form-label"></label>
+                    <div class="col-md-8 col-lg-9">
+                      <button type="submit" class="btn btn-primary" name="users_profile_edit">Simpan</button>
+                    </div>
                   </div>
                 </form><!-- End Profile Edit Form -->
 
@@ -149,31 +165,22 @@ if (isset($_POST["users_profile_edit"])) {
 
               <div class="tab-pane fade pt-3" id="profile-change-password">
                 <!-- Change Password Form -->
-                <form>
+                <form action="" method="post">
 
-                  <div class="row mb-3">
-                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="password" type="password" class="form-control" id="currentPassword">
-                    </div>
-                  </div>
+                  <input name="id" type="hidden" value="<?= $users['id']; ?>">
 
                   <div class="row mb-3">
                     <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="newpassword" type="password" class="form-control" id="newPassword">
+                      <input type="password" class="form-control" id="newPassword" name="newPassword">
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                    <label for="" class="col-md-4 col-lg-3 col-form-label"></label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                      <button type="submit" class="btn btn-primary" name="users_profile_password_edit">Ubah Password</button>
                     </div>
-                  </div>
-
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Change Password</button>
                   </div>
                 </form><!-- End Change Password Form -->
 

@@ -3,7 +3,7 @@ include "../view_template/header.php";
 include "../view_template/topbar.php";
 include "../view_template/sidebar.php";
 
-$users = query("SELECT * FROM users WHERE role_id = 2");
+$users = query("SELECT * FROM users WHERE NOT role_id = 1");
 ?>
 
 <main id="main" class="main">
@@ -41,8 +41,8 @@ $users = query("SELECT * FROM users WHERE role_id = 2");
                         <td><?= $u['phone']; ?></a></td>
                         <td><?= $u['email']; ?></a></td>
                         <td>
-                          <button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button> |
-                          <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                          <a href="users-edit.php?id=<?= $u['id']; ?>" class="btn btn-success"><i class="bi bi-pencil-square"></i></a> |
+                          <a href="users-delete.php?id=<?= $u['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin dihapus?')"><i class="bi bi-trash"></i></a>
                         </td>
                       </tr>
                       <?php $i++; ?>
