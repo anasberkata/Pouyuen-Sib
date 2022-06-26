@@ -10,25 +10,73 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-heading">Data Barang</li>
+      <li class="nav-heading">Admin</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#item" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Data Barang</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#basic-data" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Basic Data</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="item" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="basic-data" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="../view_item/item_list.php">
-              <i class="bi bi-circle"></i><span>List Barang</span>
+            <a href="../view_basic_data/material_data.php">
+              <i class="bi bi-circle"></i><span>Material Data</span>
             </a>
           </li>
           <li>
-            <a href="../view_item/item_stock.php">
-              <i class="bi bi-circle"></i><span>Stok Barang</span>
+            <a href="../view_basic_data/material_catagory.php">
+              <i class="bi bi-circle"></i><span>Material Catagory</span>
+            </a>
+          </li>
+          <li>
+            <a href="../view_basic_data/vendor_data.php">
+              <i class="bi bi-circle"></i><span>Vendor Data</span>
             </a>
           </li>
         </ul>
       </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#in-out-data" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-box-seam"></i><span>In-Out Data</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="in-out-data" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="../view_in_out_data/po_proccess.php">
+              <i class="bi bi-circle"></i><span>PO Proccess</span>
+            </a>
+          </li>
+          <li>
+            <a href="../view_in_out_data/accepts_material_in.php">
+              <i class="bi bi-circle"></i><span>Accepts Material in Proccess</span>
+            </a>
+          </li>
+          <li>
+            <a href="../view_in_out_data/out_material.php">
+              <i class="bi bi-circle"></i><span>Out Material Proccess</span>
+            </a>
+          </li>
+          <li>
+            <a href="../view_in_out_data/transfer_proccess.php">
+              <i class="bi bi-circle"></i><span>Transfer Proccess</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#stock-inventory" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-stack"></i><span>Stock Inventory</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="stock-inventory" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="../view_stock_inventory/stock.php">
+              <i class="bi bi-circle"></i><span>Stock</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-heading">User</li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#users" data-bs-toggle="collapse" href="#">
