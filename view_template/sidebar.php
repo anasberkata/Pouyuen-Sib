@@ -22,11 +22,11 @@
               <i class="bi bi-circle"></i><span>Material Data</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="../view_basic_data/material_catagory.php">
               <i class="bi bi-circle"></i><span>Material Catagory</span>
             </a>
-          </li>
+          </li> -->
           <li>
             <a href="../view_basic_data/vendor_data.php">
               <i class="bi bi-circle"></i><span>Vendor Data</span>
@@ -55,11 +55,11 @@
               <i class="bi bi-circle"></i><span>Out Material Proccess</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="../view_in_out_data/transfer_proccess.php">
               <i class="bi bi-circle"></i><span>Transfer Proccess</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </li><!-- End Components Nav -->
 

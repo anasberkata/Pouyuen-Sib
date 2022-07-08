@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2022 at 01:54 PM
+-- Generation Time: Jul 08, 2022 at 08:18 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,9 +31,9 @@ CREATE TABLE `accept_material_in` (
   `id_accept_material` int(11) NOT NULL,
   `no_nota` int(11) NOT NULL,
   `date_delivery` date NOT NULL,
-  `accept_data` varchar(255) NOT NULL,
+  `accept_date` date NOT NULL,
   `no_delivery` int(11) NOT NULL,
-  `bc_data` varchar(255) NOT NULL,
+  `bc_date` date NOT NULL,
   `no_item` int(11) NOT NULL,
   `no_vectory` int(11) NOT NULL,
   `no_po` int(11) NOT NULL,
@@ -47,31 +47,8 @@ CREATE TABLE `accept_material_in` (
   `supplier_name` varchar(255) NOT NULL,
   `check_quantity` varchar(255) NOT NULL,
   `no_bc` int(11) NOT NULL,
-  `no_container` int(11) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_actived` int(11) NOT NULL
+  `no_container` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `catagory`
---
-
-CREATE TABLE `catagory` (
-  `id_catagory` int(11) NOT NULL,
-  `catagory` varchar(255) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `catagory`
---
-
-INSERT INTO `catagory` (`id_catagory`, `catagory`, `date_created`, `is_active`) VALUES
-(1, 'Oversea', '2022-06-26', 1),
-(2, 'Local', '2022-06-26', 1);
 
 -- --------------------------------------------------------
 
@@ -80,12 +57,17 @@ INSERT INTO `catagory` (`id_catagory`, `catagory`, `date_created`, `is_active`) 
 --
 
 CREATE TABLE `material_catagory` (
-  `id_material_catagory` int(11) NOT NULL,
-  `no_catagory` int(11) NOT NULL,
-  `catagory_vectory` varchar(255) NOT NULL,
-  `data_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
+  `id_catagory` int(11) NOT NULL,
+  `catagory` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `material_catagory`
+--
+
+INSERT INTO `material_catagory` (`id_catagory`, `catagory`) VALUES
+(1, 'Oversea'),
+(2, 'Local');
 
 -- --------------------------------------------------------
 
@@ -97,14 +79,17 @@ CREATE TABLE `material_data` (
   `id_material` int(11) NOT NULL,
   `code` varchar(255) NOT NULL,
   `material_name` varchar(255) NOT NULL,
-  `vectory_code` varchar(10) NOT NULL,
   `price_unit` int(11) NOT NULL,
-  `price_currency` int(11) NOT NULL,
   `material_catagory` int(11) NOT NULL,
-  `material_type` int(11) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
+  `material_type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `material_data`
+--
+
+INSERT INTO `material_data` (`id_material`, `code`, `material_name`, `price_unit`, `material_catagory`, `material_type`) VALUES
+(1, 'K001', 'Karet', 20000, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -114,18 +99,16 @@ CREATE TABLE `material_data` (
 
 CREATE TABLE `material_type` (
   `id_material_type` int(11) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
+  `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `material_type`
 --
 
-INSERT INTO `material_type` (`id_material_type`, `type`, `date_created`, `is_active`) VALUES
-(1, 'Main Material', '2022-06-26', 1),
-(2, 'Sub Material', '2022-06-26', 1);
+INSERT INTO `material_type` (`id_material_type`, `type`) VALUES
+(1, 'Main Material'),
+(2, 'Sub Material');
 
 -- --------------------------------------------------------
 
@@ -137,9 +120,7 @@ CREATE TABLE `out_material` (
   `id_out_material` int(11) NOT NULL,
   `no_nota_order` int(11) NOT NULL,
   `date_order` date NOT NULL,
-  `request_vectory` varchar(255) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
+  `request_vectory` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -149,33 +130,20 @@ CREATE TABLE `out_material` (
 --
 
 CREATE TABLE `po_proccess` (
-  `id_po_process` int(11) NOT NULL,
-  `no_po` int(11) NOT NULL,
+  `id_po_proccess` int(11) NOT NULL,
+  `no_po` varchar(200) NOT NULL,
   `supplier_name` varchar(255) NOT NULL,
   `delivery_date` date NOT NULL,
   `date_po` varchar(255) NOT NULL,
-  `supplier_code` varchar(255) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
+  `supplier_code` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `transfer_proccess`
+-- Dumping data for table `po_proccess`
 --
 
-CREATE TABLE `transfer_proccess` (
-  `id_transfer_proccess` int(11) NOT NULL,
-  `no` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `mode` varchar(255) NOT NULL,
-  `inventory` varchar(255) NOT NULL,
-  `vectory` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `po_proccess` (`id_po_proccess`, `no_po`, `supplier_name`, `delivery_date`, `date_po`, `supplier_code`) VALUES
+(1, '001', 'STMIK Bandung', '2022-07-10', '2022-07-09', 'V003');
 
 -- --------------------------------------------------------
 
@@ -231,16 +199,21 @@ INSERT INTO `users_role` (`id_role`, `role_name`) VALUES
 
 CREATE TABLE `vendor_data` (
   `id_vendor_data` int(11) NOT NULL,
-  `code_supplier` int(11) NOT NULL,
-  `phone` int(11) NOT NULL,
-  `contact` varchar(255) NOT NULL,
+  `code_supplier` varchar(100) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `name_supplier` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `date_created` date NOT NULL,
-  `is_active` int(11) NOT NULL
+  `country` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vendor_data`
+--
+
+INSERT INTO `vendor_data` (`id_vendor_data`, `code_supplier`, `phone`, `name_supplier`, `email`, `address`, `country`) VALUES
+(1, 'V001', '9899', 'PT. MINAJAYA MERDEKA', 'minajayamerdeka@gmail.com', 'Cianjur', 'Indonesia'),
+(3, 'V003', '087635647736', 'STMIK Bandung', 'stmikbandung@gmail.com', 'Bandung', 'Indonesia');
 
 --
 -- Indexes for dumped tables
@@ -253,16 +226,10 @@ ALTER TABLE `accept_material_in`
   ADD PRIMARY KEY (`id_accept_material`);
 
 --
--- Indexes for table `catagory`
---
-ALTER TABLE `catagory`
-  ADD PRIMARY KEY (`id_catagory`);
-
---
 -- Indexes for table `material_catagory`
 --
 ALTER TABLE `material_catagory`
-  ADD PRIMARY KEY (`id_material_catagory`);
+  ADD PRIMARY KEY (`id_catagory`);
 
 --
 -- Indexes for table `material_data`
@@ -286,13 +253,7 @@ ALTER TABLE `out_material`
 -- Indexes for table `po_proccess`
 --
 ALTER TABLE `po_proccess`
-  ADD PRIMARY KEY (`id_po_process`);
-
---
--- Indexes for table `transfer_proccess`
---
-ALTER TABLE `transfer_proccess`
-  ADD PRIMARY KEY (`id_transfer_proccess`);
+  ADD PRIMARY KEY (`id_po_proccess`);
 
 --
 -- Indexes for table `users`
@@ -323,22 +284,16 @@ ALTER TABLE `accept_material_in`
   MODIFY `id_accept_material` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `catagory`
---
-ALTER TABLE `catagory`
-  MODIFY `id_catagory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `material_catagory`
 --
 ALTER TABLE `material_catagory`
-  MODIFY `id_material_catagory` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_catagory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `material_data`
 --
 ALTER TABLE `material_data`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `material_type`
@@ -356,13 +311,7 @@ ALTER TABLE `out_material`
 -- AUTO_INCREMENT for table `po_proccess`
 --
 ALTER TABLE `po_proccess`
-  MODIFY `id_po_process` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `transfer_proccess`
---
-ALTER TABLE `transfer_proccess`
-  MODIFY `id_transfer_proccess` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_po_proccess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -380,7 +329,7 @@ ALTER TABLE `users_role`
 -- AUTO_INCREMENT for table `vendor_data`
 --
 ALTER TABLE `vendor_data`
-  MODIFY `id_vendor_data` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_vendor_data` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
