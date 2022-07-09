@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2022 at 08:18 PM
+-- Generation Time: Jul 09, 2022 at 07:04 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -24,31 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accept_material_in`
+-- Table structure for table `accepts_material_in`
 --
 
-CREATE TABLE `accept_material_in` (
+CREATE TABLE `accepts_material_in` (
   `id_accept_material` int(11) NOT NULL,
   `no_nota` int(11) NOT NULL,
   `date_delivery` date NOT NULL,
   `accept_date` date NOT NULL,
   `no_delivery` int(11) NOT NULL,
   `bc_date` date NOT NULL,
-  `no_item` int(11) NOT NULL,
-  `no_vectory` int(11) NOT NULL,
-  `no_po` int(11) NOT NULL,
-  `po_item` varchar(255) NOT NULL,
-  `no_check_quantity` int(11) NOT NULL,
-  `vectory_quantity` varchar(255) NOT NULL,
+  `no_item` varchar(200) NOT NULL,
+  `no_po` varchar(200) NOT NULL,
   `po_quantity` varchar(255) NOT NULL,
-  `code_material` int(11) NOT NULL,
+  `material_code` varchar(200) NOT NULL,
   `material_name` varchar(255) NOT NULL,
-  `no_supplier` int(11) NOT NULL,
+  `supplier_code` varchar(200) NOT NULL,
   `supplier_name` varchar(255) NOT NULL,
-  `check_quantity` varchar(255) NOT NULL,
+  `check_quantity` int(11) NOT NULL,
   `no_bc` int(11) NOT NULL,
   `no_container` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `accepts_material_in`
+--
+
+INSERT INTO `accepts_material_in` (`id_accept_material`, `no_nota`, `date_delivery`, `accept_date`, `no_delivery`, `bc_date`, `no_item`, `no_po`, `po_quantity`, `material_code`, `material_name`, `supplier_code`, `supplier_name`, `check_quantity`, `no_bc`, `no_container`) VALUES
+(1, 12345678, '2022-07-10', '2022-07-11', 123, '2022-07-09', '001', '003', '12000', 'K002', 'Paku', 'V003', 'PT. RIANA JAYA', 12000, 123, 123),
+(3, 2, '2022-07-10', '2022-07-12', 2, '2022-07-12', '002', '001', '2000', 'K001', 'Karet', 'V001', 'PT. MINAJAYA MERDEKA', 2000, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -89,7 +93,8 @@ CREATE TABLE `material_data` (
 --
 
 INSERT INTO `material_data` (`id_material`, `code`, `material_name`, `price_unit`, `material_catagory`, `material_type`) VALUES
-(1, 'K001', 'Karet', 20000, 2, 1);
+(1, 'K001', 'Karet', 20000, 2, 1),
+(3, 'K002', 'Paku', 3000, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -118,10 +123,21 @@ INSERT INTO `material_type` (`id_material_type`, `type`) VALUES
 
 CREATE TABLE `out_material` (
   `id_out_material` int(11) NOT NULL,
-  `no_nota_order` int(11) NOT NULL,
+  `no_nota_order` varchar(200) NOT NULL,
   `date_order` date NOT NULL,
-  `request_vectory` varchar(255) NOT NULL
+  `material_name` varchar(255) NOT NULL,
+  `check_quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `out_material`
+--
+
+INSERT INTO `out_material` (`id_out_material`, `no_nota_order`, `date_order`, `material_name`, `check_quantity`) VALUES
+(1, '001', '2022-07-10', 'Paku', 2000),
+(2, '002', '2022-07-09', 'Paku', 1000),
+(3, '003', '2022-07-09', 'Karet', 1000),
+(5, '004', '2022-07-09', 'Karet', 1000);
 
 -- --------------------------------------------------------
 
@@ -143,7 +159,9 @@ CREATE TABLE `po_proccess` (
 --
 
 INSERT INTO `po_proccess` (`id_po_proccess`, `no_po`, `supplier_name`, `delivery_date`, `date_po`, `supplier_code`) VALUES
-(1, '001', 'STMIK Bandung', '2022-07-10', '2022-07-09', 'V003');
+(1, '001', 'PT. MINAJAYA MERDEKA', '2022-07-10', '2022-07-09', 'V001'),
+(4, '002', 'STMIK Bandung', '2022-07-14', '2022-07-09', 'V002'),
+(5, '003', 'PT. RIANA JAYA', '2022-07-10', '2022-07-09', 'V003');
 
 -- --------------------------------------------------------
 
@@ -213,16 +231,17 @@ CREATE TABLE `vendor_data` (
 
 INSERT INTO `vendor_data` (`id_vendor_data`, `code_supplier`, `phone`, `name_supplier`, `email`, `address`, `country`) VALUES
 (1, 'V001', '9899', 'PT. MINAJAYA MERDEKA', 'minajayamerdeka@gmail.com', 'Cianjur', 'Indonesia'),
-(3, 'V003', '087635647736', 'STMIK Bandung', 'stmikbandung@gmail.com', 'Bandung', 'Indonesia');
+(3, 'V002', '087635647736', 'STMIK Bandung', 'stmikbandung@gmail.com', 'Bandung', 'Indonesia'),
+(5, 'V003', '08762367363', 'PT. RIANA JAYA', 'rianajaya@gmail.com', 'Cianjur', 'Indonesia');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `accept_material_in`
+-- Indexes for table `accepts_material_in`
 --
-ALTER TABLE `accept_material_in`
+ALTER TABLE `accepts_material_in`
   ADD PRIMARY KEY (`id_accept_material`);
 
 --
@@ -278,10 +297,10 @@ ALTER TABLE `vendor_data`
 --
 
 --
--- AUTO_INCREMENT for table `accept_material_in`
+-- AUTO_INCREMENT for table `accepts_material_in`
 --
-ALTER TABLE `accept_material_in`
-  MODIFY `id_accept_material` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `accepts_material_in`
+  MODIFY `id_accept_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `material_catagory`
@@ -293,7 +312,7 @@ ALTER TABLE `material_catagory`
 -- AUTO_INCREMENT for table `material_data`
 --
 ALTER TABLE `material_data`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `material_type`
@@ -305,13 +324,13 @@ ALTER TABLE `material_type`
 -- AUTO_INCREMENT for table `out_material`
 --
 ALTER TABLE `out_material`
-  MODIFY `id_out_material` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_out_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `po_proccess`
 --
 ALTER TABLE `po_proccess`
-  MODIFY `id_po_proccess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_po_proccess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -329,7 +348,7 @@ ALTER TABLE `users_role`
 -- AUTO_INCREMENT for table `vendor_data`
 --
 ALTER TABLE `vendor_data`
-  MODIFY `id_vendor_data` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_vendor_data` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

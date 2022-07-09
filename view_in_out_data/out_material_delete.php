@@ -8,20 +8,20 @@ if (!isset($_SESSION['login'])) {
 
 require '../functions.php';
 
-$id = $_GET["id_accept_material"];
+$id = $_GET["id_out_material"];
 
-if (ami_delete($id) > 0) {
+if (om_delete($id) > 0) {
 	echo "
 		<script>
 			alert('Data berhasil dihapus');
-			document.location.href = 'accepts_material_in.php';
+			document.location.href = 'out_material.php';
 		</script>
 	";
 } else {
 	echo "
 		<script>
 			alert('Data gagal dihapus');
-			document.location.href = 'accepts_material_in.php';
+			document.location.href = 'out_material.php';
 		</script>
 
 	";

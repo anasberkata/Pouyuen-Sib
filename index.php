@@ -19,8 +19,7 @@ include "v_header.php";
                         <img src="assets/img/logopouyuen.png" alt="logo" width="100px">
                         <div class="d-flex justify-content-center py-4 text-center">
                             <a href="#" class="logo d-flex align-items-center w-auto">
-                                <span class="d-none d-lg-block">Sistem Informasi Barang
-                                    <br>PT. Pou Yuen Indonesia</span>
+                                <span class="d-none d-lg-block">Sistem Informasi Keluar Masuk Gudang</span>
                             </a>
                         </div><!-- End Logo -->
 

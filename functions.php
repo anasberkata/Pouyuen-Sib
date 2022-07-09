@@ -305,3 +305,141 @@ function po_delete($id)
     mysqli_query($conn, "DELETE FROM po_proccess WHERE id_po_proccess = $id");
     return mysqli_affected_rows($conn);
 }
+
+
+// ---------------------------------------------------------- ACCEPTS MATERIAL IN -----------------------------------------------------
+function ami_tambah($data)
+{
+    global $conn;
+
+    $no_nota = $data["no_nota"];
+    $date_delivery = $data["date_delivery"];
+    $accept_date = $data["accept_date"];
+    $no_delivery = $data["no_delivery"];
+    $bc_date = $data["bc_date"];
+    $no_item = $data["no_item"];
+    $no_po = $data["no_po"];
+    $po_quantity = $data["po_quantity"];
+    $material_code = $data["material_code"];
+    $material_name = $data["material_name"];
+    $supplier_code = $data["supplier_code"];
+    $supplier_name = $data["supplier_name"];
+    $check_quantity = $data["check_quantity"];
+    $no_bc = $data["no_bc"];
+    $no_container = $data["no_container"];
+
+    $query = "INSERT INTO accepts_material_in
+				VALUES
+			(NULL, '$no_nota', '$date_delivery', '$accept_date', '$no_delivery', '$bc_date', '$no_item', '$no_po', '$po_quantity', '$material_code', '$material_name', '$supplier_code', '$supplier_name', '$check_quantity', '$no_bc', '$no_container')
+			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function ami_edit($data)
+{
+    global $conn;
+
+    $id_accept_material = $data["id_accept_material"];
+    $no_nota = $data["no_nota"];
+    $date_delivery = $data["date_delivery"];
+    $accept_date = $data["accept_date"];
+    $no_delivery = $data["no_delivery"];
+    $bc_date = $data["bc_date"];
+    $no_item = $data["no_item"];
+    $no_po = $data["no_po"];
+    $po_quantity = $data["po_quantity"];
+    $material_code = $data["material_code"];
+    $material_name = $data["material_name"];
+    $supplier_code = $data["supplier_code"];
+    $supplier_name = $data["supplier_name"];
+    $check_quantity = $data["check_quantity"];
+    $no_bc = $data["no_bc"];
+    $no_container = $data["no_container"];
+
+    $query = "UPDATE accepts_material_in SET
+			no_nota = '$no_nota',
+			date_delivery = '$date_delivery',
+			accept_date = '$accept_date',
+			no_delivery = '$no_delivery',
+			bc_date = '$bc_date',
+			no_item = '$no_item',
+			no_po = '$no_po',
+			po_quantity = '$po_quantity',
+			material_code = '$material_code',
+			material_name = '$material_name',
+			supplier_code = '$supplier_code',
+			supplier_name = '$supplier_name',
+			check_quantity = '$check_quantity',
+			no_bc = '$no_bc',
+			no_container = '$no_container'
+
+            WHERE id_accept_material = $id_accept_material
+			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function ami_delete($id)
+{
+    global $conn;
+
+    mysqli_query($conn, "DELETE FROM accepts_material_in WHERE id_accept_material = $id");
+    return mysqli_affected_rows($conn);
+}
+
+// ---------------------------------------------------------- MATERIAL OUT -----------------------------------------------------
+function om_tambah($data)
+{
+    global $conn;
+
+    $no_nota_order = $data["no_nota_order"];
+    $date_order = $data["date_order"];
+    $material_name = $data["material_name"];
+    $check_quantity = $data["check_quantity"];
+
+    $query = "INSERT INTO out_material
+				VALUES
+			(NULL, '$no_nota_order', '$date_order', '$material_name', '$check_quantity')
+			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function om_edit($data)
+{
+    global $conn;
+
+    $id_out_material = $data["id_out_material"];
+    $no_nota_order = $data["no_nota_order"];
+    $date_order = $data["date_order"];
+    $material_name = $data["material_name"];
+    $check_quantity = $data["check_quantity"];
+
+    $query = "UPDATE out_material SET
+			no_nota_order = '$no_nota_order',
+			date_order = '$date_order',
+			material_name = '$material_name',
+			check_quantity = '$check_quantity'
+
+            WHERE id_out_material = $id_out_material
+			";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function om_delete($id)
+{
+    global $conn;
+
+    mysqli_query($conn, "DELETE FROM out_material WHERE id_out_material = $id");
+    return mysqli_affected_rows($conn);
+}

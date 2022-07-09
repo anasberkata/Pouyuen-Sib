@@ -3,12 +3,12 @@ include "../view_template/header.php";
 include "../view_template/topbar.php";
 include "../view_template/sidebar.php";
 
-$vendor = query("SELECT * FROM vendor_data");
+// $vendor = query("SELECT * FROM vendor_data");
 ?>
 
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Tambah PO Proccess</h1>
+        <h1>Tambah Accept Material</h1>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
@@ -23,62 +23,119 @@ $vendor = query("SELECT * FROM vendor_data");
                             <div class="card-body">
                                 <div class="row mb-4">
                                     <div class="col">
-                                        <h5 class="card-title">Tambah PO</h5>
+                                        <h5 class="card-title">Tambah Accept Material In</h5>
                                     </div>
                                     <div class="col">
-                                        <a href="po_proccess.php" class="btn btn-primary mt-3 float-end">Kembali</a>
+                                        <a href="accepts_material_in.php" class="btn btn-primary mt-3 float-end">Kembali</a>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <form action="" method="POST">
+                                <form action="" method="POST" class="row">
+                                    <div class="col-12 col-lg-6">
                                         <div class="row mb-3">
-                                            <label class="col-sm-3 col-form-label">No. PO</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="no_po">
+                                            <label class="col-sm-5 col-form-label">No. Nota</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="no_nota">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-3 col-form-label">Kode Supplier</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="supplier_code" name="supplier_code" onkeyup="fill_supplier_name()">
+                                            <label class="col-sm-5 col-form-label">Tanggal Pengiriman</label>
+                                            <div class="col-sm-7">
+                                                <input type="date" class="form-control" name="date_delivery" id="date_delivery" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">Tanggal Diterima</label>
+                                            <div class="col-sm-7">
+                                                <input type="date" class="form-control" name="accept_date">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">Tanggal Bea Cukai</label>
+                                            <div class="col-sm-7">
+                                                <input type="date" class="form-control" name="bc_date">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">No. Pengiriman</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="no_delivery">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">No. Bea Cukai</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="no_bc">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">No. Kontainer</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="no_container">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">No. Item</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="no_item">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                <!-- <select class="form-select" aria-label="material_catagory" id="supplier_code" name="supplier_code" onchange="fill_supplier_name()">
-                                                    <option selected>Pilih Kode Supplier</option>
-                                                    <?php foreach ($vendor as $v) : ?>
-                                                        <option value="<?= $v["id_vendor_data"]; ?>"><?= $v["code_supplier"]; ?></option>
-                                                    <?php endforeach; ?>
-                                                </select> -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">No. PO</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="no_po" id="no_po" onkeyup="fill_po_data()">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-3 col-form-label">Nama Supplier</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="supplier_name" name="supplier_name" readonly>
+                                            <label class="col-sm-5 col-form-label">Kode Material</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="material_code" id="material_code" onkeyup="fill_material_data()">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-3 col-form-label">Tanggal PO</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" name="date_po">
+                                            <label class="col-sm-5 col-form-label">Nama Material</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="material_name" id="material_name" readonly>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-3 col-form-label">Tanggal Pengiriman</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" name="delivery_date">
+                                            <label class="col-sm-5 col-form-label">Kode Supplier</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="supplier_code" id="supplier_code" readonly>
                                             </div>
                                         </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">Nama Supplier</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="supplier_name" id="supplier_name" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">PO Kuantiti</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="po_quantity">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label">Cek Kuantiti</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" name="check_quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-5 col-form-label"></label>
+                                            <div class="col-sm-7">
+                                                <button type="submit" class="btn btn-primary w-100" name="ami_tambah">Tambah Accept Material</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
 
-                                        <div class="row mb-3">
-                                            <label class="col-sm-3 col-form-label"></label>
-                                            <div class="col-sm-9">
-                                                <button type="submit" class="btn btn-primary" name="po_tambah">Tambah PO Proccess</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div><!-- End Recent Sales -->
@@ -91,15 +148,29 @@ $vendor = query("SELECT * FROM vendor_data");
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
-    function fill_supplier_name() {
-        var supplier_code = $("#supplier_code").val();
+    function fill_po_data() {
+        var no_po = $("#no_po").val();
         $.ajax({
-            url: 'ajax.php',
-            data: "supplier_code=" + supplier_code,
+            url: 'ajax/ajax_ami_01.php',
+            data: "no_po=" + no_po,
         }).success(function(data) {
             var json = data,
                 obj = JSON.parse(json);
+            $('#supplier_code').val(obj.supplier_code);
             $('#supplier_name').val(obj.supplier_name);
+            $('#date_delivery').val(obj.delivery_date);
+        });
+    }
+
+    function fill_material_data() {
+        var material_code = $("#material_code").val();
+        $.ajax({
+            url: 'ajax/ajax_ami_02.php',
+            data: "material_code=" + material_code,
+        }).success(function(data) {
+            var json = data,
+                obj = JSON.parse(json);
+            $('#material_name').val(obj.material_name);
         });
     }
 </script>
@@ -108,13 +179,13 @@ $vendor = query("SELECT * FROM vendor_data");
 <?php include "../view_template/footer.php";
 
 // Tambah RT RW
-if (isset($_POST["po_tambah"])) {
+if (isset($_POST["ami_tambah"])) {
 
     // cek apakah data berhasil di tambahkan atau tidak
-    if (po_tambah($_POST) > 0) {
+    if (ami_tambah($_POST) > 0) {
         echo "<script>
                 alert('Data berhasil ditambahkan');
-                document.location.href= 'po_proccess.php';
+                document.location.href= 'accepts_material_in.php';
             </script>";
     } else {
         echo "<script>

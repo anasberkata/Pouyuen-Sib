@@ -94,7 +94,7 @@ $vendor = query("SELECT * FROM vendor_data");
     function fill_supplier_name() {
         var supplier_code = $("#supplier_code").val();
         $.ajax({
-            url: 'ajax.php',
+            url: 'ajax/ajax_po.php',
             data: "supplier_code=" + supplier_code,
         }).success(function(data) {
             var json = data,

@@ -44,8 +44,8 @@ $po_proccess = query("SELECT * FROM po_proccess");
                         <td><?= $pp["no_po"]; ?></td>
                         <td><?= $pp["supplier_code"]; ?></td>
                         <td><?= $pp["supplier_name"]; ?></td>
-                        <td><?= date('d/m/Y', strtotime($pp["delivery_date"])); ?></td>
-                        <td><?= date('d/m/Y', strtotime($pp["date_po"])); ?></td>
+                        <td><?= date('d / m / Y', strtotime($pp["delivery_date"])); ?></td>
+                        <td><?= date('d / m / Y', strtotime($pp["date_po"])); ?></td>
                         <td>
                           <a href="po_proccess_edit.php?id_po_proccess=<?= $pp["id_po_proccess"] ?>" class="btn btn-success mb-2"><i class="bi bi-pencil-square"></i></a>
                           <a href="po_proccess_delete.php?id_po_proccess=<?= $pp["id_po_proccess"] ?>" class="btn btn-danger mb-2"><i class="bi bi-trash" onclick="return confirm('Yakin akan menghapus data PO : <?= $pp['supplier_name']; ?> ?');"></i></a>
