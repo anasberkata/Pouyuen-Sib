@@ -276,23 +276,21 @@ function po_edit($data)
 {
     global $conn;
 
-    $id_vendor_data = $data["id_vendor_data"];
-    $code_supplier = $data["code_supplier"];
-    $phone = $data["phone"];
-    $name_supplier = $data["name_supplier"];
-    $email = $data["email"];
-    $address = $data["address"];
-    $country = $data["country"];
+    $id_po_proccess = $data["id_po_proccess"];
+    $no_po = $data["no_po"];
+    $supplier_name = $data["supplier_name"];
+    $delivery_date = $data["delivery_date"];
+    $date_po = $data["date_po"];
+    $supplier_code = $data["supplier_code"];
 
     $query = "UPDATE po_proccess SET
-			code_supplier = '$code_supplier',
-			phone = '$phone',
-			name_supplier = '$name_supplier',
-			email = '$email',
-			address = '$address',
-			country = '$country'
+			no_po = '$no_po',
+			supplier_name = '$supplier_name',
+			delivery_date = '$delivery_date',
+			date_po = '$date_po',
+			supplier_code = '$supplier_code'
 
-            WHERE id_vendor_data = $id_vendor_data
+            WHERE id_po_proccess = $id_po_proccess
 			";
 
     mysqli_query($conn, $query);
