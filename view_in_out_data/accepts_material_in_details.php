@@ -115,14 +115,14 @@ $ami = query("SELECT * FROM accepts_material_in WHERE id_accept_material = $id")
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
-                                                    <div class="col">PO Kuantiti</div>
+                                                    <div class="col">PO Qty</div>
                                                     <div class="col">: <?= $ami["po_quantity"] ?></div>
                                                 </div>
                                             </li>
                                             <li class="list-group-item">
                                                 <div class="row">
-                                                    <div class="col">Cek Kuantiti</div>
-                                                    <div class="col">: <?= $ami["check_quantity"] ?></div>
+                                                    <div class="col">Cek Qty</div>
+                                                    <div class="col">: <?= $ami["check_quantity_in"] ?></div>
                                                 </div>
                                             </li>
                                         </ul>

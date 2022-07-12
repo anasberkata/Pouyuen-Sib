@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2022 at 07:04 PM
+-- Generation Time: Jul 12, 2022 at 06:54 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -41,7 +41,7 @@ CREATE TABLE `accepts_material_in` (
   `material_name` varchar(255) NOT NULL,
   `supplier_code` varchar(200) NOT NULL,
   `supplier_name` varchar(255) NOT NULL,
-  `check_quantity` int(11) NOT NULL,
+  `check_quantity_in` int(11) NOT NULL,
   `no_bc` int(11) NOT NULL,
   `no_container` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -50,9 +50,10 @@ CREATE TABLE `accepts_material_in` (
 -- Dumping data for table `accepts_material_in`
 --
 
-INSERT INTO `accepts_material_in` (`id_accept_material`, `no_nota`, `date_delivery`, `accept_date`, `no_delivery`, `bc_date`, `no_item`, `no_po`, `po_quantity`, `material_code`, `material_name`, `supplier_code`, `supplier_name`, `check_quantity`, `no_bc`, `no_container`) VALUES
+INSERT INTO `accepts_material_in` (`id_accept_material`, `no_nota`, `date_delivery`, `accept_date`, `no_delivery`, `bc_date`, `no_item`, `no_po`, `po_quantity`, `material_code`, `material_name`, `supplier_code`, `supplier_name`, `check_quantity_in`, `no_bc`, `no_container`) VALUES
 (1, 12345678, '2022-07-10', '2022-07-11', 123, '2022-07-09', '001', '003', '12000', 'K002', 'Paku', 'V003', 'PT. RIANA JAYA', 12000, 123, 123),
-(3, 2, '2022-07-10', '2022-07-12', 2, '2022-07-12', '002', '001', '2000', 'K001', 'Karet', 'V001', 'PT. MINAJAYA MERDEKA', 2000, 2, 2);
+(3, 2, '2022-07-10', '2022-07-12', 2, '2022-07-12', '002', '001', '2000', 'K001', 'Karet', 'V001', 'PT. MINAJAYA MERDEKA', 2000, 2, 2),
+(4, 1234, '2022-07-10', '2022-07-12', 1234, '2022-07-12', '1234', '001', '200', 'k003', 'Lem', 'V001', 'PT. MINAJAYA MERDEKA', 200, 1234, 1234);
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,8 @@ CREATE TABLE `material_data` (
 
 INSERT INTO `material_data` (`id_material`, `code`, `material_name`, `price_unit`, `material_catagory`, `material_type`) VALUES
 (1, 'K001', 'Karet', 20000, 2, 1),
-(3, 'K002', 'Paku', 3000, 2, 2);
+(3, 'K002', 'Paku', 3000, 2, 2),
+(4, 'K003', 'Lem', 2000, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -123,21 +125,19 @@ INSERT INTO `material_type` (`id_material_type`, `type`) VALUES
 
 CREATE TABLE `out_material` (
   `id_out_material` int(11) NOT NULL,
+  `id_ami` int(11) NOT NULL,
   `no_nota_order` varchar(200) NOT NULL,
   `date_order` date NOT NULL,
-  `material_name` varchar(255) NOT NULL,
-  `check_quantity` int(11) NOT NULL
+  `check_quantity_out` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `out_material`
 --
 
-INSERT INTO `out_material` (`id_out_material`, `no_nota_order`, `date_order`, `material_name`, `check_quantity`) VALUES
-(1, '001', '2022-07-10', 'Paku', 2000),
-(2, '002', '2022-07-09', 'Paku', 1000),
-(3, '003', '2022-07-09', 'Karet', 1000),
-(5, '004', '2022-07-09', 'Karet', 1000);
+INSERT INTO `out_material` (`id_out_material`, `id_ami`, `no_nota_order`, `date_order`, `check_quantity_out`) VALUES
+(7, 1, '001', '2022-07-12', 7000),
+(8, 3, '002', '2022-07-12', 200);
 
 -- --------------------------------------------------------
 
@@ -300,7 +300,7 @@ ALTER TABLE `vendor_data`
 -- AUTO_INCREMENT for table `accepts_material_in`
 --
 ALTER TABLE `accepts_material_in`
-  MODIFY `id_accept_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_accept_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `material_catagory`
@@ -312,7 +312,7 @@ ALTER TABLE `material_catagory`
 -- AUTO_INCREMENT for table `material_data`
 --
 ALTER TABLE `material_data`
-  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `material_type`
@@ -324,7 +324,7 @@ ALTER TABLE `material_type`
 -- AUTO_INCREMENT for table `out_material`
 --
 ALTER TABLE `out_material`
-  MODIFY `id_out_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_out_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `po_proccess`

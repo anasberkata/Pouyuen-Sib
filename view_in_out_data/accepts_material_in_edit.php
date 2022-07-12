@@ -117,15 +117,15 @@ $ami = query("SELECT * FROM accepts_material_in WHERE id_accept_material = $id")
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-5 col-form-label">PO Kuantiti</label>
+                                            <label class="col-sm-5 col-form-label">PO Qty</label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control" name="po_quantity" value="<?= $ami["po_quantity"]; ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-5 col-form-label">Cek Kuantiti</label>
+                                            <label class="col-sm-5 col-form-label">Cek Qty</label>
                                             <div class="col-sm-7">
-                                                <input type="text" class="form-control" name="check_quantity" value="<?= $ami["check_quantity"]; ?>">
+                                                <input type="text" class="form-control" name="check_quantity_in" value="<?= $ami["check_quantity_in"]; ?>">
                                             </div>
                                         </div>
                                     </div>

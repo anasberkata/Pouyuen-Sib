@@ -5,8 +5,10 @@ include "../view_template/sidebar.php";
 
 $id = $_GET["id_out_material"];
 
-$om = query("SELECT * FROM out_material WHERE id_out_material = $id")[0];
-$material = query("SELECT * FROM material_data");
+$ami = query("SELECT * FROM accepts_material_in");
+$om = query("SELECT * FROM out_material
+        INNER JOIN accepts_material_in ON out_material.id_ami = accepts_material_in.id_accept_material
+        WHERE id_out_material = $id")[0];
 ?>
 
 <main id="main" class="main">
@@ -37,6 +39,17 @@ $material = query("SELECT * FROM material_data");
                                     <form action="" method="POST">
                                         <input type="hidden" name="id_out_material" value="<?= $om["id_out_material"]; ?>">
                                         <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label">Material In</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-select" aria-label="material_catagory" name="id_accept_material">
+                                                    <option value="<?= $om["id_ami"]; ?>" selected><?= $om["material_name"]; ?> | <?= $om["supplier_name"]; ?></option>
+                                                    <?php foreach ($ami as $a) : ?>
+                                                        <option value="<?= $a["id_accept_material"]; ?>"><?= $a["material_name"]; ?> | <?= $a["supplier_name"]; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
                                             <label class="col-sm-2 col-form-label">No. Nota Pesanan</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="no_nota_order" value="<?= $om["no_nota_order"]; ?>">
@@ -48,21 +61,10 @@ $material = query("SELECT * FROM material_data");
                                                 <input type="date" class="form-control" name="date_order" value="<?= $om["date_order"]; ?>">
                                             </div>
                                         </div>
-                                        <div class=" row mb-3">
-                                            <label class="col-sm-2 col-form-label">Nama Material</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-select" aria-label="material_catagory" name="material_name">
-                                                    <option value="<?= $om["material_name"]; ?>"><?= $om["material_name"]; ?></option>
-                                                    <?php foreach ($material as $m) : ?>
-                                                        <option value="<?= $m["material_name"]; ?>"><?= $m["material_name"]; ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label">Cek Kuantiti</label>
+                                            <label class="col-sm-2 col-form-label">Cek Qty</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="check_quantity" value="<?= $om["check_quantity"]; ?>">
+                                                <input type="text" class="form-control" name="check_quantity_out" value="<?= $om["check_quantity_out"]; ?>">
                                             </div>
                                         </div>
 

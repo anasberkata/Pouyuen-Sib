@@ -324,13 +324,13 @@ function ami_tambah($data)
     $material_name = $data["material_name"];
     $supplier_code = $data["supplier_code"];
     $supplier_name = $data["supplier_name"];
-    $check_quantity = $data["check_quantity"];
+    $check_quantity_in = $data["check_quantity_in"];
     $no_bc = $data["no_bc"];
     $no_container = $data["no_container"];
 
     $query = "INSERT INTO accepts_material_in
 				VALUES
-			(NULL, '$no_nota', '$date_delivery', '$accept_date', '$no_delivery', '$bc_date', '$no_item', '$no_po', '$po_quantity', '$material_code', '$material_name', '$supplier_code', '$supplier_name', '$check_quantity', '$no_bc', '$no_container')
+			(NULL, '$no_nota', '$date_delivery', '$accept_date', '$no_delivery', '$bc_date', '$no_item', '$no_po', '$po_quantity', '$material_code', '$material_name', '$supplier_code', '$supplier_name', '$check_quantity_in', '$no_bc', '$no_container')
 			";
 
     mysqli_query($conn, $query);
@@ -355,7 +355,7 @@ function ami_edit($data)
     $material_name = $data["material_name"];
     $supplier_code = $data["supplier_code"];
     $supplier_name = $data["supplier_name"];
-    $check_quantity = $data["check_quantity"];
+    $check_quantity_in = $data["check_quantity_in"];
     $no_bc = $data["no_bc"];
     $no_container = $data["no_container"];
 
@@ -372,7 +372,7 @@ function ami_edit($data)
 			material_name = '$material_name',
 			supplier_code = '$supplier_code',
 			supplier_name = '$supplier_name',
-			check_quantity = '$check_quantity',
+			check_quantity_in = '$check_quantity_in',
 			no_bc = '$no_bc',
 			no_container = '$no_container'
 
@@ -397,14 +397,14 @@ function om_tambah($data)
 {
     global $conn;
 
+    $id_ami = $data["id_accept_material"];
     $no_nota_order = $data["no_nota_order"];
     $date_order = $data["date_order"];
-    $material_name = $data["material_name"];
-    $check_quantity = $data["check_quantity"];
+    $check_quantity_out = $data["check_quantity_out"];
 
     $query = "INSERT INTO out_material
 				VALUES
-			(NULL, '$no_nota_order', '$date_order', '$material_name', '$check_quantity')
+			(NULL, '$id_ami', '$no_nota_order', '$date_order', '$check_quantity_out')
 			";
 
     mysqli_query($conn, $query);
@@ -417,16 +417,16 @@ function om_edit($data)
     global $conn;
 
     $id_out_material = $data["id_out_material"];
+    $id_ami = $data["id_accept_material"];
     $no_nota_order = $data["no_nota_order"];
     $date_order = $data["date_order"];
-    $material_name = $data["material_name"];
-    $check_quantity = $data["check_quantity"];
+    $check_quantity_out = $data["check_quantity_out"];
 
     $query = "UPDATE out_material SET
+			id_ami = '$id_ami',
 			no_nota_order = '$no_nota_order',
 			date_order = '$date_order',
-			material_name = '$material_name',
-			check_quantity = '$check_quantity'
+			check_quantity_out = '$check_quantity_out'
 
             WHERE id_out_material = $id_out_material
 			";

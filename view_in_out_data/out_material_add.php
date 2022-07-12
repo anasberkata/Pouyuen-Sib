@@ -3,7 +3,7 @@ include "../view_template/header.php";
 include "../view_template/topbar.php";
 include "../view_template/sidebar.php";
 
-$material = query("SELECT * FROM material_data");
+$ami = query("SELECT * FROM accepts_material_in");
 ?>
 
 <main id="main" class="main">
@@ -32,7 +32,17 @@ $material = query("SELECT * FROM material_data");
 
                                 <div class="row">
                                     <form action="" method="POST">
-
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label">Material In</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-select" aria-label="material_catagory" name="id_accept_material">
+                                                    <option selected>Pilih Material In</option>
+                                                    <?php foreach ($ami as $a) : ?>
+                                                        <option value="<?= $a["id_accept_material"]; ?>"><?= $a["material_name"]; ?> | <?= $a["supplier_name"]; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="row mb-3">
                                             <label class="col-sm-2 col-form-label">No. Nota Pesanan</label>
                                             <div class="col-sm-10">
@@ -46,20 +56,9 @@ $material = query("SELECT * FROM material_data");
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label">Nama Material</label>
+                                            <label class="col-sm-2 col-form-label">Cek Qty</label>
                                             <div class="col-sm-10">
-                                                <select class="form-select" aria-label="material_catagory" name="material_name">
-                                                    <option selected>Pilih Material</option>
-                                                    <?php foreach ($material as $m) : ?>
-                                                        <option value="<?= $m["material_name"]; ?>"><?= $m["material_name"]; ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label">Cek Kuantiti</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="check_quantity">
+                                                <input type="text" class="form-control" name="check_quantity_out">
                                             </div>
                                         </div>
 

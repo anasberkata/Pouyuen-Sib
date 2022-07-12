@@ -3,7 +3,9 @@ include "../view_template/header.php";
 include "../view_template/topbar.php";
 include "../view_template/sidebar.php";
 
-$out_material = query("SELECT * FROM out_material");
+$out_material = query("SELECT * FROM out_material
+                INNER JOIN accepts_material_in ON out_material.id_ami = accepts_material_in.id_accept_material
+                ");
 ?>
 
 <main id="main" class="main">
@@ -30,8 +32,9 @@ $out_material = query("SELECT * FROM out_material");
                       <th scope="col">No. </th>
                       <th scope="col">No. Nota Pesanan</th>
                       <th scope="col">Tanggal Pesanan</th>
+                      <th scope="col">Kode Material</th>
                       <th scope="col">Nama Material</th>
-                      <th scope="col">Cek Kuantiti</th>
+                      <th scope="col">Cek Qty</th>
                       <th scope="col">Opsi</th>
                     </tr>
                   </thead>
@@ -42,8 +45,9 @@ $out_material = query("SELECT * FROM out_material");
                         <th scope="row"><?= $i; ?></a></th>
                         <td><?= $om["no_nota_order"]; ?></td>
                         <td><?= date('d / m / Y', strtotime($om["date_order"])); ?></td>
+                        <td><?= $om["material_code"]; ?></td>
                         <td><?= $om["material_name"]; ?></td>
-                        <td><?= $om["check_quantity"]; ?></td>
+                        <td><?= $om["check_quantity_out"]; ?></td>
                         <td>
                           <a href="out_material_edit.php?id_out_material=<?= $om["id_out_material"] ?>" class="btn btn-success mb-2"><i class="bi bi-pencil-square"></i></a>
                           <a href="out_material_delete.php?id_out_material=<?= $om["id_out_material"] ?>" class="btn btn-danger mb-2"><i class="bi bi-trash" onclick="return confirm('Yakin akan menghapus data No. Nota : <?= $om['no_nota_order']; ?> ?');"></i></a>

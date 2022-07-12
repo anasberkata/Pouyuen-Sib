@@ -29,7 +29,7 @@ $accepts_material_in = query("SELECT * FROM accepts_material_in");
                     <tr>
                       <th scope="col">No. </th>
                       <th scope="col">Tanggal Pengiriman</th>
-                      <th scope="col">Cek Kuantiti</th>
+                      <th scope="col">Cek Qty</th>
                       <th scope="col">Nama Material</th>
                       <th scope="col">Nama Supplier</th>
                       <th scope="col">Opsi</th>
@@ -41,7 +41,7 @@ $accepts_material_in = query("SELECT * FROM accepts_material_in");
                       <tr>
                         <th scope="row"><?= $i; ?></a></th>
                         <td><?= date('d / m / Y', strtotime($ami["date_delivery"])); ?></td>
-                        <td><?= $ami["check_quantity"]; ?></td>
+                        <td><?= $ami["check_quantity_in"]; ?></td>
                         <td><?= $ami["material_name"]; ?></td>
                         <td><?= $ami["supplier_name"]; ?></td>
                         <td>
