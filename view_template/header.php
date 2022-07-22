@@ -6,7 +6,7 @@ if (!isset($_SESSION['login'])) {
   exit;
 }
 
-require "../functions.php";
+require '../functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
