@@ -29,22 +29,28 @@ function users_add($data)
     $email = $data["email"];
     $role_id = $data["role_id"];
 
-    $result = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+    $cek_username = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+    $cek_email = mysqli_query($conn, "SELECT email FROM users WHERE email = '$email'");
 
     // Cek Username Mahasiswa Sudah Ada Atau Belum
-    if (mysqli_fetch_assoc($result)) {
+    if (mysqli_fetch_assoc($cek_username)) {
         echo "<script>
             alert('Username Sudah Terdaftar!');
             document.location.href = 'users-add.php';
             </script>";
-    }
-
-    $query = "INSERT INTO users
+    } else if (mysqli_fetch_assoc($cek_email)) {
+        echo "<script>
+            alert('Email Sudah Terdaftar!');
+            document.location.href = 'users-add.php';
+            </script>";
+    } else {
+        $query = "INSERT INTO users
 				VALUES
 			(NULL, '$nama', '$username', '$password', '$email', '$phone', '$alamat', '$role_id')
 			";
 
-    mysqli_query($conn, $query);
+        mysqli_query($conn, $query);
+    }
 
     return mysqli_affected_rows($conn);
 }

@@ -4,25 +4,17 @@ include "../view_template/topbar.php";
 include "../view_template/sidebar.php";
 
 if (isset($_POST["users_add"])) {
-  $email = $_POST["email"];
 
-  if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  if (users_add($_POST) > 0) {
     echo "<script>
-                alert('Email sudah terdaftar');
-                document.location.href= 'users-list.php';
-            </script>";
-  } else {
-    if (users_add($_POST) > 0) {
-      echo "<script>
             alert('Pengguna Berhasil Ditambah!');
             document.location.href = 'users-list.php';
           </script>";
-    } else {
-      echo "<script>
+  } else {
+    echo "<script>
             alert('Pengguna Gagal Ditambah!');
             document.location.href = 'users-add.php';
           </script>";
-    }
   }
 }
 ?>
