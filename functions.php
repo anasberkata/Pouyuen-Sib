@@ -408,14 +408,42 @@ function om_tambah($data)
     $date_order = $data["date_order"];
     $check_quantity_out = $data["check_quantity_out"];
 
-    $query = "INSERT INTO out_material
+    $ami = query("SELECT * FROM accepts_material_in WHERE id_accept_material = $id_ami")[0];
+    $ami["check_quantity_in"];
+
+    $check_quantity_in = $ami["check_quantity_in"] - $check_quantity_out;
+
+    if ($ami["check_quantity_in"] == 0) {
+        echo "<script>
+        alert('Stok material Habis');
+        document.location.href= 'view_in_out_data/out_material.php';
+        </script>";
+    } else {
+
+        update_qty_in($id_ami, $check_quantity_in);
+
+        $query = "INSERT INTO out_material
 				VALUES
 			(NULL, '$id_ami', '$no_nota_order', '$date_order', '$check_quantity_out')
 			";
+    }
 
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
+}
+
+function update_qty_in($id_ami, $check_quantity_in)
+{
+    global $conn;
+
+    $query = "UPDATE accepts_material_in SET
+			check_quantity_in = '$check_quantity_in'
+
+            WHERE id_accept_material = $id_ami
+			";
+
+    mysqli_query($conn, $query);
 }
 
 function om_edit($data)

@@ -38,7 +38,7 @@ $ami = query("SELECT * FROM accepts_material_in");
                                                 <select class="form-select" aria-label="material_catagory" name="id_accept_material">
                                                     <option selected>Pilih Material In</option>
                                                     <?php foreach ($ami as $a) : ?>
-                                                        <option value="<?= $a["id_accept_material"]; ?>"><?= $a["material_name"]; ?> | <?= $a["supplier_name"]; ?></option>
+                                                        <option value="<?= $a["id_accept_material"]; ?>"><?= $a["material_name"]; ?> || <?= $a["supplier_name"]; ?> || Stok : <?= $a["check_quantity_in"]; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
