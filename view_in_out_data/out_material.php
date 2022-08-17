@@ -25,6 +25,7 @@ $out_material = query("SELECT * FROM out_material
               <div class="card-body">
                 <!-- <h5 class="card-title">Material Data</h5> -->
                 <a href="out_material_add.php" class="btn btn-primary my-4">Tambah Data</a>
+                <a href="out_material_excel.php" class="btn btn-warning my-4">Download</a>
 
                 <table class="table table-borderless datatable">
                   <thead>

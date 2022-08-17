@@ -416,7 +416,7 @@ function om_tambah($data)
     if ($ami["check_quantity_in"] == 0) {
         echo "<script>
         alert('Stok material Habis');
-        document.location.href= 'view_in_out_data/out_material.php';
+        document.location.href= 'out_material.php';
         </script>";
     } else {
 

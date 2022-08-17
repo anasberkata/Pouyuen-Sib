@@ -23,6 +23,7 @@ $po_proccess = query("SELECT * FROM po_proccess");
               <div class="card-body">
                 <!-- <h5 class="card-title">Material Data</h5> -->
                 <a href="po_proccess_add.php" class="btn btn-primary my-4">Tambah Data</a>
+                <a href="po_proccess_excel.php" class="btn btn-warning my-4">Download</a>
 
                 <table class="table table-borderless datatable">
                   <thead>

@@ -1,11 +1,12 @@
 <?php
-include "../view_template/header.php";
-include "../view_template/topbar.php";
-include "../view_template/sidebar.php";
+require '../functions.php';
 
 $stock_material = query("SELECT * FROM out_material
                 INNER JOIN accepts_material_in ON out_material.id_ami = accepts_material_in.id_accept_material
                 ");
+
+header("Content-type: application/vnd-ms-excel");
+header("Content-Disposition: attachment; filename=Data Stok Material.xls");
 ?>
 
 <main id="main" class="main">
@@ -23,8 +24,6 @@ $stock_material = query("SELECT * FROM out_material
                     <div class="col-12">
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body pt-3">
-                                <!-- <h5 class="card-title">Material Data</h5> -->
-                                <a href="stock_excel.php" class="btn btn-warning my-4">Download</a>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
@@ -65,6 +64,3 @@ $stock_material = query("SELECT * FROM out_material
     </section>
 
 </main><!-- End #main -->
-
-
-<?php include "../view_template/footer.php"; ?>
