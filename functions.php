@@ -418,6 +418,11 @@ function om_tambah($data)
         alert('Stok material Habis');
         document.location.href= 'out_material.php';
         </script>";
+    } else if ($ami["check_quantity_in"] < $check_quantity_out) {
+        echo "<script>
+        alert('Quantity material yang dimasukan tidak mencukupi');
+        document.location.href= 'out_material.php';
+        </script>";
     } else {
 
         update_qty_in($id_ami, $check_quantity_in);

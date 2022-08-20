@@ -24,7 +24,8 @@ $stock_material = query("SELECT * FROM out_material
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body pt-3">
                                 <!-- <h5 class="card-title">Material Data</h5> -->
-                                <a href="stock_excel.php" class="btn btn-warning my-4">Download</a>
+                                <!-- <a href="stock_excel.php" class="btn btn-warning my-4">Download</a> -->
+                                <a href="stock_pdf.php" target="blank" class="btn btn-warning my-4">Download</a>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
