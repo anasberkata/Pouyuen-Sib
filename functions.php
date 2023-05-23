@@ -1,7 +1,7 @@
 <?php
 
 // KONEKSI DATABASE =====================================================
-$conn = mysqli_connect("localhost", "root", "", "db_sikumang");
+$conn = mysqli_connect("localhost", "root", "", "skripsi_sikumang");
 
 
 function query($query)
